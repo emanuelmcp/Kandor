@@ -37,12 +37,12 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Account findById(String id) {
-        return null;
+        return accountRepository.findById(id);
     }
 
     @Override
     public void delete(String id) {
-
+        accountRepository.delete(id);
     }
 
     @Override

@@ -8,7 +8,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Builder
-public class Account extends AbstractModel<String> {
+public class Account extends AbstractModel<Account, String> {
     private String uuid;
     private String nick;
     private String email;

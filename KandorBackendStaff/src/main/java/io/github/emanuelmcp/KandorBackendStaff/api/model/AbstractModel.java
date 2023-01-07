@@ -2,6 +2,7 @@ package io.github.emanuelmcp.KandorBackendStaff.api.model;
 
 import io.github.emanuelmcp.KandorBackendStaff.api.mappers.RowMapper;
 import io.github.emanuelmcp.KandorBackendStaff.database.managers.PosgresManager;
+import io.github.emanuelmcp.KandorBackendStaff.database.models.Account;
 import io.github.emanuelmcp.KandorBackendStaff.database.queries.AccountQueries;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
@@ -10,18 +11,21 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 
-public abstract class AbstractModel<K> {
+public abstract class AbstractModel<T, K> {
     String query;
     PosgresManager pool;
-    RowMapper<AbstractModel<K>> mapper;
+    RowMapper<AbstractModel<T, K>> mapper;
     Connection connection = null;
     PreparedStatement statement = null;
     ResultSet results = null;
-    public AbstractModel<K> save(AbstractModel<K> abstractModel) {
+    private K id;
+
+    public K save(AbstractModel<T, K> abstractModel) {
         try {
             connection = pool.getConnection();
             connection.setAutoCommit(false);
@@ -35,9 +39,9 @@ public abstract class AbstractModel<K> {
         } finally {
             pool.close(connection, statement, results);
         }
-        return null;
+        return abstractModel.getId();
     }
-    public void update(@NotNull AbstractModel<K> abstractModel) {
+    public void update(@NotNull AbstractModel<T, K> abstractModel) {
         try {
             connection = pool.getConnection();
             connection.setAutoCommit(false);
@@ -55,11 +59,11 @@ public abstract class AbstractModel<K> {
     public long count() {
         return 0;
     }
-    public List<AbstractModel<K>> findAll(int size, int page, String queryable) {
-        return K;
+    public List<T> findAll(int size, int page, String queryable) {
+        return new ArrayList<>();
     }
-    public AbstractModel<K> findById(K id) {
-        AbstractModel<K> abstractModel = null;
+    public T findById(K id) {
+        AbstractModel<T, K> abstractModel = null;
         try {
             connection = pool.getConnection();
             statement = connection.prepareStatement(AccountQueries.FIND_BY_ID);
@@ -71,7 +75,7 @@ public abstract class AbstractModel<K> {
         } finally {
             pool.close(connection, statement, results);
         }
-        return abstractModel;
+        return (T) abstractModel;
     }
     public void delete(K id) {
         try {
@@ -98,4 +102,9 @@ public abstract class AbstractModel<K> {
             ex.printStackTrace();
         }
     }
+
+    private K getId() {
+        return this.id;
+    }
+
 }
