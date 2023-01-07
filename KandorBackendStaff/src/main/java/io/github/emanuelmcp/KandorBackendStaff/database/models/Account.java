@@ -1,18 +1,14 @@
 package io.github.emanuelmcp.KandorBackendStaff.database.models;
 
-import io.github.emanuelmcp.KandorBackendStaff.api.model.Model;
+import io.github.emanuelmcp.KandorBackendStaff.api.model.AbstractModel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
-
 @Getter
 @Setter
 @Builder
-public class Account extends Model<String> implements Serializable {
+public class Account extends AbstractModel<String> {
     private String uuid;
     private String nick;
     private String email;

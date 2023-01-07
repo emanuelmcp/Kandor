@@ -1,7 +1,7 @@
 package io.github.emanuelmcp.KandorBackendStaff.api.repository;
 
 
-import io.github.emanuelmcp.KandorBackendStaff.api.model.Model;
+import io.github.emanuelmcp.KandorBackendStaff.api.model.AbstractModel;
 
-public abstract class GroupRepository extends Model<Group, String> {
+public abstract class GroupRepository extends AbstractModel<String> {
 }

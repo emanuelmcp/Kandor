@@ -1,6 +1,6 @@
 package io.github.emanuelmcp.KandorBackendStaff.database.mappers;
+
 import io.github.emanuelmcp.KandorBackendStaff.api.mappers.RowMapper;
-import io.github.emanuelmcp.KandorBackendStaff.api.model.Model;
 import io.github.emanuelmcp.KandorBackendStaff.database.models.Account;
 import org.jetbrains.annotations.NotNull;
 
@@ -8,7 +8,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-public class AccountMapper implements RowMapper {
+public class AccountMapper implements RowMapper<Account> {
     @Override
     public Account rowRead(@NotNull ResultSet rs) throws SQLException {
         return Account.builder()
