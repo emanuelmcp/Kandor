@@ -1,0 +1,19 @@
+name: Skills
+version: '${project.version}'
+main: io.github.emanuelmcp.plugin.KandorServer
+api-version: 1.19
+authors: [ emanuelmcp ]
+description: My minecrafts server core
+website: https://github.com/emanuelmcp
+commands:
+  register:
+    description: Comando para registrar un jugador
+    usage: /register <password> <confirmPassword>
+  login:
+    description: Comando para que un jugador se loguee
+    usage: /login <password>
+  setpassword:
+    description: Comando para cambiar la contraseña
+    usage: /setpassword <oldPassword> <newPassword> <confirmPassword>
+  group:
+    description: Commands for group managing

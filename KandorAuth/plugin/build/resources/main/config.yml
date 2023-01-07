@@ -1,0 +1,49 @@
+persistence_db:
+  hostname: 'localhost'
+  port: 5432
+  database: 'test_db'
+  username: 'root'
+  password: 'root'
+messages:
+  commands:
+    command_args_error: '&4Este comando no se usa así'
+    command_use_error: '&4Este comando solo lo puede usar un jugador'
+    register:
+      is_registered: '&4Ya estás registrado'
+      not_same_passwords: '&4Las contraseñas no coinciden'
+      not_secure_password: '&4La contraseña no es segura'
+      successful: '&2Te has registrado correctamente'
+    unregister:
+      is_not_registered: '&4No estás registrado'
+      successful: '&2Has borrado tu cuenta exitosamente'
+    login:
+      is_logged: '&4Ya estás logueado'
+      password_error: '&4Contraseña incorrecta'
+      player_not_exists: '&4No existes en la base de datos'
+      successful: '&2Te has logueado correctamente'
+    setpassword:
+      not_logged: '&6Para cambiar la contraseña primero tienes que loguearte'
+      password_error: '&4Contraseña incorrecta'
+      player_not_exists: '&4No existes en la base de datos'
+      not_same_passwords: '&4Las contraseñas no coinciden'
+      successful: '&2Has cambiado la contraseña correctamente'
+    group_add:
+      group_exists: '&4Este grupo existe'
+      successful: '&2Has añadido el grupo correctamente'
+    group_remove:
+      group_not_exists: '&4Este grupo no existe'
+      successful: '&2Has borrado el grupo correctamente'
+
+title_messages:
+  register_message:
+    title: 'Por favor registrate'
+    subtitle: 'Utiliza el comando /register <contraseña> <confirmar contraseña>'
+    fadeIn: 20
+    stay: 200
+    fadeOut: 20
+  login_message:
+    title: 'Por favor logueate'
+    subtitle: 'Utiliza el comando /login <contraseña>'
+    fadeIn: 20
+    stay: 200
+    fadeOut: 20
