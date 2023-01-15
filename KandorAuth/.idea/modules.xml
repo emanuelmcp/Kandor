@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/api/KandorAuth.api.main.iml" filepath="$PROJECT_DIR$/.idea/modules/api/KandorAuth.api.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/database/KandorAuth.database.main.iml" filepath="$PROJECT_DIR$/.idea/modules/database/KandorAuth.database.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/plugin/KandorAuth.plugin.main.iml" filepath="$PROJECT_DIR$/.idea/modules/plugin/KandorAuth.plugin.main.iml" />
+    </modules>
+  </component>
+</project>
