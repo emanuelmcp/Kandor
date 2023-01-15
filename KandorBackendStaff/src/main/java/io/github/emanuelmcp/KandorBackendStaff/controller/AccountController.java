@@ -1,6 +1,6 @@
 package io.github.emanuelmcp.KandorBackendStaff.controller;
 
-import io.github.emanuelmcp.KandorBackendStaff.api.AccountService;
+import io.github.emanuelmcp.KandorBackendStaff.api.service.AccountService;
 import io.github.emanuelmcp.KandorBackendStaff.database.models.Account;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +41,6 @@ public class AccountController {
         return account.orElse(new Account());
     }
 
-    //TODO ARREGLAR NO FUNCIONA
     @PostMapping
     public Account saveAccount(@RequestBody Account account){
         return service.save(account);

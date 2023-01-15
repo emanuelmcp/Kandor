@@ -1,6 +1,6 @@
 package io.github.emanuelmcp.KandorBackendStaff.service;
 
-import io.github.emanuelmcp.KandorBackendStaff.api.AccountService;
+import io.github.emanuelmcp.KandorBackendStaff.api.service.AccountService;
 import io.github.emanuelmcp.KandorBackendStaff.database.AccountRepository;
 import io.github.emanuelmcp.KandorBackendStaff.database.models.Account;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +8,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -27,11 +26,6 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public Optional<Account> viewById(String uuid) {
         return repository.findById(uuid);
-    }
-
-    @Override
-    public List<Account> viewAllAccounts() {
-        return null;
     }
 
     @Override

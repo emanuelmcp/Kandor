@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS grupo(
     nombre VARCHAR(50) PRIMARY KEY,
     descripcion VARCHAR(100),
     prefijo VARCHAR(5),
-    suffijo VARCHAR(5)
+    sufijo VARCHAR(5)
 );
 CREATE TABLE IF NOT EXISTS cuenta_grupo(
     uuid_cuenta VARCHAR(36),
@@ -44,4 +44,8 @@ INSERT INTO cuenta VALUES ('1h18e9e8-cb2e-412c-a1b7-835e73340d35', 'adariel8', '
 INSERT INTO cuenta VALUES ('1i18e9e8-cb2e-412c-a1b7-835e73340d35', 'adariel9', 'emanuelmcp9@gmail.com', 'contrasenita9', '2023-09-09', true, false);
 INSERT INTO cuenta VALUES ('1j18e9e8-cb2e-412c-a1b7-835e73340d35', 'adariel10', 'emanuelmc10p@gmail.com', 'contrasenita10', '2023-10-10', true, false);
 INSERT INTO cuenta VALUES ('1k18e9e8-cb2e-412c-a1b7-835e73340d35', 'adariel11', 'emanuelmcp11@gmail.com', 'contrasenita11', '2023-11-11', true, false);
+
+INSERT INTO grupo VALUES ('default1', 'grupo por defecto1', 'def1', 'def1');
+INSERT INTO grupo VALUES ('default2', 'grupo por defecto2', 'def2', 'def2');
+INSERT INTO grupo VALUES ('default3', 'grupo por defecto3', 'def3', 'def3');
 
