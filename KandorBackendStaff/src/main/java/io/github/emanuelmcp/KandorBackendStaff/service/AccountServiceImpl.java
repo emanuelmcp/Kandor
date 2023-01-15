@@ -2,6 +2,7 @@ package io.github.emanuelmcp.KandorBackendStaff.service;
 
 import io.github.emanuelmcp.KandorBackendStaff.api.service.AccountService;
 import io.github.emanuelmcp.KandorBackendStaff.database.AccountRepository;
+import io.github.emanuelmcp.KandorBackendStaff.database.GroupRepository;
 import io.github.emanuelmcp.KandorBackendStaff.database.models.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,9 +14,11 @@ import java.util.Optional;
 @Service
 public class AccountServiceImpl implements AccountService {
     private final AccountRepository repository;
+    private final GroupRepository groupRepository;
     @Autowired
-    public AccountServiceImpl(AccountRepository repository) {
+    public AccountServiceImpl(AccountRepository repository, GroupRepository groupRepository) {
         this.repository = repository;
+        this.groupRepository = groupRepository;
     }
 
     @Override

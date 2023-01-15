@@ -8,8 +8,10 @@ import org.springframework.data.relational.core.mapping.Table;
 @Data
 @Table("Permisos")
 public class Permission {
-    @Column("nombre")
     @Id
+    @Column("identificador")
+    Integer id;
+    @Column("nombre")
     String groupName;
     @Column("description")
     String description;

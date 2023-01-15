@@ -26,24 +26,22 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public Optional<Group> viewById(String id) {
+    public Optional<Group> viewById(Integer id) {
         return repository.findById(id);
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(Integer id) {
         repository.deleteById(id);
     }
 
     @Override
     public Group save(Group group) {
-        group.setNew(true);
         return repository.save(group);
     }
 
     @Override
     public Group update(Group group) {
-        group.setNew(false);
         group.setGroupName(group.getGroupName());
         return repository.save(group);
     }

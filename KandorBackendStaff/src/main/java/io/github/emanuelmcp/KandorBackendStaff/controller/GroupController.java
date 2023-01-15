@@ -30,7 +30,7 @@ public class GroupController {
 
     @GetMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Group viewGroup(@PathVariable String id){
+    public Group viewGroup(@PathVariable Integer id){
         Optional<Group> account = service.viewById(id);
         return account.orElse(new Group());
     }
@@ -41,13 +41,13 @@ public class GroupController {
     }
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT) // 204 No content.
-    public void deleteProject(@PathVariable String id){
+    public void deleteProject(@PathVariable Integer id){
         service.delete(id);
     }
 
     @PutMapping(value = "{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Group updateGroup(@PathVariable String id, @RequestBody @NotNull Group account) {
+    public Group updateGroup(@PathVariable Integer id, @RequestBody @NotNull Group account) {
         return service.update(account);
     }
 }

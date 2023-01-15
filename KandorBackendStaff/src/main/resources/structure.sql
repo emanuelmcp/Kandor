@@ -8,29 +8,31 @@ CREATE TABLE IF NOT EXISTS cuenta(
     baneado BOOLEAN NOT NULL
 );
 CREATE TABLE IF NOT EXISTS grupo(
-    nombre VARCHAR(50) PRIMARY KEY,
+    identificador SERIAL PRIMARY KEY,
+    nombre VARCHAR(50) UNIQUE,
     descripcion VARCHAR(100),
     prefijo VARCHAR(5),
     sufijo VARCHAR(5)
 );
 CREATE TABLE IF NOT EXISTS cuenta_grupo(
     uuid_cuenta VARCHAR(36),
-    nombre_grupo VARCHAR(50),
-    CONSTRAINT cuenta_grupo_pk PRIMARY KEY (uuid_cuenta, nombre_grupo),
+    id_grupo SERIAL,
+    CONSTRAINT cuenta_grupo_pk PRIMARY KEY (uuid_cuenta, id_grupo),
     CONSTRAINT cuenta_cuenta_grupo_fk FOREIGN KEY(uuid_cuenta) REFERENCES cuenta(uuid),
-    CONSTRAINT grupo_cuenta_grupo_fk FOREIGN KEY(nombre_grupo) REFERENCES grupo(nombre)
+    CONSTRAINT grupo_cuenta_grupo_fk FOREIGN KEY(id_grupo) REFERENCES grupo(identificador)
 );
 CREATE TABLE IF NOT EXISTS permiso(
-    nombre VARCHAR(50) PRIMARY KEY,
+    identificador SERIAL PRIMARY KEY,
+    nombre VARCHAR(50) UNIQUE,
     descripcion VARCHAR(100)
 );
 
 CREATE TABLE IF NOT EXISTS grupo_permisos(
-    nombre_grupo VARCHAR(36),
-    id_permiso VARCHAR(50),
-    CONSTRAINT grupo_permisos_pk PRIMARY KEY (nombre_grupo, id_permiso),
-    CONSTRAINT cuenta_grupo_permisos_fk FOREIGN KEY(nombre_grupo) REFERENCES grupo(nombre),
-    CONSTRAINT permisos_grupo_permisos_fk FOREIGN KEY(id_permiso) REFERENCES permiso(nombre)
+    id_grupo SERIAL,
+    id_permiso SERIAL,
+    CONSTRAINT grupo_permisos_pk PRIMARY KEY (id_grupo, id_permiso),
+    CONSTRAINT cuenta_grupo_permisos_fk FOREIGN KEY(id_grupo) REFERENCES grupo(identificador),
+    CONSTRAINT permisos_grupo_permisos_fk FOREIGN KEY(id_permiso) REFERENCES permiso(identificador)
 );
 
 INSERT INTO cuenta VALUES ('1a18e9e8-cb2e-412c-a1b7-835e73340d35', 'adariel1', 'emanuelmcp1@gmail.com', 'contrasenita1', '2023-01-01', true, false);
@@ -45,7 +47,9 @@ INSERT INTO cuenta VALUES ('1i18e9e8-cb2e-412c-a1b7-835e73340d35', 'adariel9', '
 INSERT INTO cuenta VALUES ('1j18e9e8-cb2e-412c-a1b7-835e73340d35', 'adariel10', 'emanuelmc10p@gmail.com', 'contrasenita10', '2023-10-10', true, false);
 INSERT INTO cuenta VALUES ('1k18e9e8-cb2e-412c-a1b7-835e73340d35', 'adariel11', 'emanuelmcp11@gmail.com', 'contrasenita11', '2023-11-11', true, false);
 
-INSERT INTO grupo VALUES ('default1', 'grupo por defecto1', 'def1', 'def1');
-INSERT INTO grupo VALUES ('default2', 'grupo por defecto2', 'def2', 'def2');
-INSERT INTO grupo VALUES ('default3', 'grupo por defecto3', 'def3', 'def3');
+INSERT INTO grupo(nombre, descripcion, prefijo, sufijo) VALUES ('default1', 'grupo por defecto1', 'def1', 'def1');
+INSERT INTO grupo(nombre, descripcion, prefijo, sufijo) VALUES ('default2', 'grupo por defecto2', 'def2', 'def2');
+INSERT INTO grupo(nombre, descripcion, prefijo, sufijo) VALUES ('default3', 'grupo por defecto3', 'def3', 'def3');
+
+INSERT INTO cuenta_grupo VALUES ('1e18e9e8-cb2e-412c-a1b7-835e73340d35', 1);
 
