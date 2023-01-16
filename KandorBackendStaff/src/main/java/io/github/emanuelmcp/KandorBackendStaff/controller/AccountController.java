@@ -38,7 +38,7 @@ public class AccountController {
     @ResponseStatus(HttpStatus.OK)
     public Account viewAccount(@PathVariable String id){
         Optional<Account> account = service.viewById(id);
-        return account.orElse(new Account());
+        return account.get();
     }
 
     //TODO ARREGLAR NO FUNCIONA

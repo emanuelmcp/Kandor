@@ -32,7 +32,7 @@ public class GroupController {
     @ResponseStatus(HttpStatus.OK)
     public Group viewGroup(@PathVariable Integer id){
         Optional<Group> account = service.viewById(id);
-        return account.orElse(new Group());
+        return account.get();
     }
 
     @PostMapping

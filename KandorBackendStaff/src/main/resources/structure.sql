@@ -47,9 +47,11 @@ INSERT INTO "account" VALUES ('1i18e9e8-cb2e-412c-a1b7-835e73340d35', 'adariel9'
 INSERT INTO "account" VALUES ('1j18e9e8-cb2e-412c-a1b7-835e73340d35', 'adariel10', 'emanuelmc10p@gmail.com', 'contrasenita10', '2023-10-10', true, false);
 INSERT INTO "account" VALUES ('1k18e9e8-cb2e-412c-a1b7-835e73340d35', 'adariel11', 'emanuelmcp11@gmail.com', 'contrasenita11', '2023-11-11', true, false);
 
-INSERT INTO "group"("name", "description", "preffix", "suffix") VALUES ('default1', 'grupo por defecto1', 'def1', 'def1');
-INSERT INTO "group"("name", "description", "preffix", "suffix") VALUES ('default2', 'grupo por defecto2', 'def2', 'def2');
-INSERT INTO "group"("name", "description", "preffix", "suffix") VALUES ('default3', 'grupo por defecto3', 'def3', 'def3');
+INSERT INTO "group"("name", "description", "prefix", "suffix") VALUES ('default1', 'grupo por defecto1', 'def1', 'def1');
+INSERT INTO "group"("name", "description", "prefix", "suffix") VALUES ('default2', 'grupo por defecto2', 'def2', 'def2');
+INSERT INTO "group"("name", "description", "prefix", "suffix") VALUES ('default3', 'grupo por defecto3', 'def3', 'def3');
 
 INSERT INTO "staff" VALUES ('1e18e9e8-cb2e-412c-a1b7-835e73340d35', 1);
+INSERT INTO "staff" VALUES ('1e18e9e8-cb2e-412c-a1b7-835e73340d35', 2);
+INSERT INTO "staff" VALUES ('1e18e9e8-cb2e-412c-a1b7-835e73340d35', 3);
 
