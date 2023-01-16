@@ -42,7 +42,7 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public Group update(Group group) {
-        group.setGroupName(group.getGroupName());
+        group.setId(group.getId());
         return repository.save(group);
     }
 }

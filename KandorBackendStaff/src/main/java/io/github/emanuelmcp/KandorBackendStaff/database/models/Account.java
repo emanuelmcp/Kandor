@@ -15,30 +15,22 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Data
-@Table("cuenta")
+@Table("account")
 public class Account implements Persistable<String> {
-    @Column("uuid")
     @Id
     private String uuid;
 
-    @Column("nick")
     private String nick;
 
-    @Column("email")
     private String email;
 
-    @Column("password")
     private String password;
 
-    @Column("ultimo_login")
-    private LocalDate lastLogin;
-
-    @Column("logueado")
+    private LocalDate login;
     private boolean logged;
-
-    @Column("baneado")
     private boolean banned;
 
+    @JsonIgnore
     private Set<GroupRef> groupId = new HashSet<>();
     @Transient
     @JsonIgnore

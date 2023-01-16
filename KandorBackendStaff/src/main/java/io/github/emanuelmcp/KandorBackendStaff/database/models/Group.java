@@ -8,17 +8,11 @@ import org.springframework.data.relational.core.mapping.Table;
 
 import java.io.Serializable;
 @Data
-@Table("grupo")
+@Table("group")
 public class Group implements Serializable {
-    @Id
-    @Column("identificador")
     Integer id;
-    @Column("nombre")
-    String groupName;
-    @Column("descripcion")
+    String name;
     String description;
-    @Column("prefijo")
     String prefix;
-    @Column("sufijo")
     String suffix;
 }
