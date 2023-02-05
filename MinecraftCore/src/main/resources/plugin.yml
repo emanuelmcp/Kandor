@@ -1,0 +1,7 @@
+name: MinecraftCore
+version: '${project.version}'
+main: io.github.emanuelmcp.minecraftcore.MinecraftCore
+api-version: 1.19
+authors: [ emanuelmcp ]
+description: Server Core for Kandor Server
+website: https://github.com/emanuelmcp

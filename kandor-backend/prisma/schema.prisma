@@ -7,46 +7,48 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model account {
-  uuid                    String                    @id @db.VarChar(36)
-  nick                    String                    @db.VarChar(50)
-  email                   String?                   @unique @db.VarChar(70)
-  password                String                    @db.VarChar(300)
-  last_login              DateTime                  @default(dbgenerated("CURRENT_DATE")) @db.Timestamp(6)
-  logged                  Boolean                   @default(false)
-  banned                  Boolean
-  account_type_permission account_type_permission[]
-  role_account            role_account[]
+model Account {
+  uuid         String         @id @db.VarChar(36)
+  nick         String         @db.VarChar(50)
+  email        String?        @unique @db.VarChar(70)
+  password     String         @db.VarChar(300)
+  lastLogin    DateTime       @default(dbgenerated("CURRENT_DATE")) @db.Timestamp(6)
+  logged       Boolean        @default(false)
+  banned       Boolean
+  AccountGroup AccountGroup[]
 }
 
-model account_type {
-  group_name   String         @id @db.VarChar(50)
-  description  String?        @db.VarChar(100)
-  prefix       String?        @db.VarChar(5)
-  suffix       String?        @db.VarChar(5)
-  role_account role_account[]
+model AccountGroup {
+  accountUuid String  @db.VarChar(36)
+  groupId     Int
+  Account     Account @relation(fields: [accountUuid], references: [uuid], onDelete: NoAction, onUpdate: NoAction, map: "accountGroup_fk1")
+  Group       Group   @relation(fields: [groupId], references: [groupId], onDelete: NoAction, onUpdate: NoAction, map: "accountGroup_fk2")
+
+  @@id([accountUuid, groupId], map: "accountGroup_pk")
 }
 
-model account_type_permission {
-  account_uuid  String     @db.VarChar(36)
-  permission_id String     @db.VarChar(50)
-  permission    permission @relation(fields: [permission_id], references: [permission_name], onDelete: NoAction, onUpdate: NoAction, map: "role_account_permission_fk")
-  account       account    @relation(fields: [account_uuid], references: [uuid], onDelete: NoAction, onUpdate: NoAction, map: "role_account_type_account_fk")
-
-  @@id([account_uuid, permission_id], map: "account_type_permission_pk")
+model Group {
+  groupId         Int               @id @default(autoincrement())
+  groupName       String?           @db.VarChar(50)
+  description     String?           @db.VarChar(100)
+  prefix          String?           @db.VarChar(5)
+  suffix          String?           @db.VarChar(5)
+  AccountGroup    AccountGroup[]
+  GroupPermission GroupPermission[]
 }
 
-model permission {
-  permission_name         String                    @id @db.VarChar(50)
-  description             String?                   @db.VarChar(100)
-  account_type_permission account_type_permission[]
+model GroupPermission {
+  groupId      Int
+  permissionId Int
+  Group        Group      @relation(fields: [groupId], references: [groupId], onDelete: NoAction, onUpdate: NoAction, map: "groupPermission_fk1")
+  Permission   Permission @relation(fields: [permissionId], references: [permissionId], onDelete: NoAction, onUpdate: NoAction, map: "groupPermission_fk2")
+
+  @@id([groupId, permissionId], map: "groupPermission_pk")
 }
 
-model role_account {
-  account_uuid String       @db.VarChar(36)
-  role_id      String       @db.VarChar(50)
-  account      account      @relation(fields: [account_uuid], references: [uuid], onDelete: NoAction, onUpdate: NoAction, map: "role_account_account_fk")
-  account_type account_type @relation(fields: [role_id], references: [group_name], onDelete: NoAction, onUpdate: NoAction, map: "role_account_role_fk")
-
-  @@id([account_uuid, role_id], map: "role_account_pk")
+model Permission {
+  permissionId    Int               @id @default(autoincrement())
+  permissionName  String?           @unique @db.VarChar(50)
+  description     String?           @db.VarChar(100)
+  GroupPermission GroupPermission[]
 }

@@ -1,8 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Exclude } from 'class-transformer';
+import { Type } from 'class-transformer';
 import {
   IsBoolean,
-  IsDateString,
+  IsDate,
   IsEmail,
   IsOptional,
   IsString,
@@ -11,31 +11,31 @@ import {
 export class CreateAccountDto {
   @ApiProperty()
   @IsString()
-  uuid: string;
+  readonly uuid: string;
 
   @ApiProperty()
   @IsString()
-  nick: string;
+  readonly nick: string;
 
   @ApiProperty()
   @IsOptional()
   @IsEmail()
-  email: string;
+  readonly email: string;
 
   @ApiProperty()
   @IsString()
-  @Exclude()
-  password: string;
+  readonly password: string;
 
   @ApiProperty()
-  @IsDateString()
-  last_login: Date;
-
-  @ApiProperty()
-  @IsBoolean()
-  logged: boolean;
+  @IsDate()
+  @Type(() => Date)
+  readonly lastLogin: Date;
 
   @ApiProperty()
   @IsBoolean()
-  banned: boolean;
+  readonly logged: boolean;
+
+  @ApiProperty()
+  @IsBoolean()
+  readonly banned: boolean;
 }

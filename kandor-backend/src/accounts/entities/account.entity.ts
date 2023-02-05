@@ -1,11 +1,8 @@
-import { account } from '@prisma/client';
-
-export class Account implements account {
+export class AccountDTO {
   uuid: string;
   nick: string;
   email: string;
-  password: string;
-  last_login: Date;
+  lastLogin: Date;
   logged: boolean;
   banned: boolean;
 }
