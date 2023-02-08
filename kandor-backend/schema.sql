@@ -9,10 +9,10 @@ CREATE TABLE IF NOT EXISTS "Account"(
 );
 CREATE TABLE IF NOT EXISTS "Group"(
     "groupId" SERIAL PRIMARY KEY,
-    "groupName" VARCHAR(50),
-    "description" VARCHAR(100),
-    "prefix" VARCHAR(5),
-    "suffix" VARCHAR(5)
+    "groupName" VARCHAR(50) UNIQUE,
+    "description" VARCHAR(100) NULL,
+    "prefix" VARCHAR(5) UNIQUE NULL,
+    "suffix" VARCHAR(5) UNIQUE NULL
 );
 CREATE TABLE IF NOT EXISTS "Permission"(
     "permissionId" SERIAL PRIMARY KEY,

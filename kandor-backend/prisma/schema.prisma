@@ -29,10 +29,10 @@ model AccountGroup {
 
 model Group {
   groupId         Int               @id @default(autoincrement())
-  groupName       String?           @db.VarChar(50)
+  groupName       String?           @unique @db.VarChar(50)
   description     String?           @db.VarChar(100)
-  prefix          String?           @db.VarChar(5)
-  suffix          String?           @db.VarChar(5)
+  prefix          String?           @unique @db.VarChar(5)
+  suffix          String?           @unique @db.VarChar(5)
   AccountGroup    AccountGroup[]
   GroupPermission GroupPermission[]
 }

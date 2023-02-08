@@ -3,6 +3,9 @@ import { CreateAccountDto } from './dto/create-account.dto';
 import { UpdateAccountDto } from './dto/update-account.dto';
 import { PrismaService } from '../common/prisma/prisma.service';
 import { HandlerExceptionService } from '../common/handler-exception/handler-exception.service';
+import { Group } from 'src/groups/entities/group.entity';
+import { plainToClass } from 'class-transformer';
+import { AccountDTO } from './entities/account.dto';
 
 @Injectable()
 export class AccountsService {
@@ -24,11 +27,10 @@ export class AccountsService {
 
   //TODO: crear paginación
   async findAll() {
-    /*const accounts: Account[] = await this.prisma.account.findMany();
-    for (let i = 0; i < accounts.length; i++) {
-      delete accounts[i].password;
-    }
-    return accounts;*/
+    const accounts = await this.prisma.account.findMany({
+      include: { AccountGroup: true },
+    });
+    return accounts;
   }
 
   async findOne(uuid: string) {
@@ -39,7 +41,7 @@ export class AccountsService {
     });
     if (!account)
       throw new NotFoundException(`Account with id ${uuid} not exists`);
-    return account;
+    return plainToClass(AccountDTO, account);
   }
 
   update(id: string, updateAccountDto: UpdateAccountDto) {

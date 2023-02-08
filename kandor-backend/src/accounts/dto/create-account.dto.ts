@@ -7,6 +7,7 @@ import {
   IsOptional,
   IsString,
 } from 'class-validator';
+import { CreateGroupDto } from 'src/groups/dto/create-group.dto';
 
 export class CreateAccountDto {
   @ApiProperty()
@@ -38,4 +39,6 @@ export class CreateAccountDto {
   @ApiProperty()
   @IsBoolean()
   readonly banned: boolean;
+
+  readonly groups?: CreateGroupDto[];
 }

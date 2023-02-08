@@ -1,4 +1,4 @@
-INSERT INTO account VALUES
+INSERT INTO "Account" VALUES
   ('jugador1', 'nick1', 'email1@email.com', 'password1', now(), true, false),
   ('jugador2', 'nick2', 'email2@email.com', 'password2', now(), true, false),
   ('jugador3', 'nick3', 'email3@email.com', 'password3', now(), true, false),
@@ -19,3 +19,16 @@ INSERT INTO account VALUES
   ('jugador18', 'nick18', 'email18@email.com', 'password18', now(), true, false),
   ('jugador19', 'nick19', 'email19@email.com', 'password19', now(), true, false),
   ('jugador20', 'nick20', 'email20@email.com', 'password20', now(), true, false);
+
+
+INSERT INTO "Group" ("groupName", "description", "prefix", "suffix") VALUES
+  ('grupo1', 'descripcion 1', 'g1', '1g'),
+  ('grupo2', 'descripcion 2', 'g2', '2g'),
+  ('grupo3', 'descripcion 3', 'g3', '3g'),
+  ('grupo4', 'descripcion 4', 'g4', '4g'),
+  ('grupo5', 'descripcion 5', 'g5', '5g'),
+  ('grupo6', 'descripcion 6', 'g6', '6g'),
+  ('grupo7', 'descripcion 7', 'g7', '7g'),
+  ('grupo8', 'descripcion 8', 'g8', '8g'),
+  ('grupo9', 'descripcion 9', 'g9', '9g'),
+  ('grupo10', 'descripcion 10', 'g10', '10g');
