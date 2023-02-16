@@ -1,10 +1,7 @@
-import { Global, Module } from '@nestjs/common';
-import { PrismaService } from './prisma/prisma.service';
+import { Module } from '@nestjs/common';
 import { HandlerExceptionService } from './handler-exception/handler-exception.service';
 
-@Global()
 @Module({
-  providers: [PrismaService, HandlerExceptionService],
-  exports: [PrismaService, HandlerExceptionService],
+  providers: [HandlerExceptionService]
 })
 export class CommonModule {}

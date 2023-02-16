@@ -1,58 +1,33 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateAccountDto } from './dto/create-account.dto';
-import { UpdateAccountDto } from './dto/update-account.dto';
-import { PrismaService } from '../common/prisma/prisma.service';
-import { HandlerExceptionService } from '../common/handler-exception/handler-exception.service';
-import { Group } from 'src/groups/entities/group.entity';
-import { plainToClass } from 'class-transformer';
-import { AccountDTO } from './entities/account.dto';
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { CreateAccountDto } from 'src/shared/dto/create-account.dto';
+import { UpdateAccountDto } from 'src/shared/dto/update-account.dto';
+import { Account } from 'src/shared/entities/account.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class AccountsService {
   constructor(
-    private prisma: PrismaService,
-    private exception: HandlerExceptionService,
+    @InjectRepository(Account)
+    private readonly accountRepository: Repository<Account>,
   ) {}
-
-  async create(data: CreateAccountDto): Promise<CreateAccountDto> {
-    try {
-      const account: CreateAccountDto = await this.prisma.account.create({
-        data,
-      });
-      return account;
-    } catch (error) {
-      this.exception.handleException(error);
-    }
+  create(createAccountDto: CreateAccountDto) {
+    return 'This action adds a new account';
   }
 
-  //TODO: crear paginación
-  async findAll() {
-    const accounts = await this.prisma.account.findMany({
-      include: { AccountGroup: true },
-    });
-    return accounts;
+  findAll() {
+    return `This action returns all accounts`;
   }
 
   async findOne(uuid: string) {
-    const account = await this.prisma.account.findFirst({
-      where: {
-        uuid: uuid,
-      },
-    });
-    if (!account)
-      throw new NotFoundException(`Account with id ${uuid} not exists`);
-    return plainToClass(AccountDTO, account);
+    return this.accountRepository.findOneBy({ uuid });
   }
 
-  update(id: string, updateAccountDto: UpdateAccountDto) {
-    return `This action updates a #${id} account`;
+  update(uuid: string, updateAccountDto: UpdateAccountDto) {
+    return `This action updates a #${uuid} account`;
   }
 
   remove(uuid: string) {
-    this.prisma.account.delete({
-      where: {
-        uuid: uuid,
-      },
-    });
+    return `This action removes a #${uuid} account`;
   }
 }

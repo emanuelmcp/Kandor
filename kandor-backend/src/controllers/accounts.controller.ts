@@ -7,9 +7,9 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
-import { AccountsService } from './accounts.service';
-import { CreateAccountDto } from './dto/create-account.dto';
-import { UpdateAccountDto } from './dto/update-account.dto';
+import { AccountsService } from 'src/accounts/accounts.service';
+import { CreateAccountDto } from 'src/shared/dto/create-account.dto';
+import { UpdateAccountDto } from 'src/shared/dto/update-account.dto';
 
 @Controller('accounts')
 export class AccountsController {
@@ -25,9 +25,9 @@ export class AccountsController {
     return this.accountsService.findAll();
   }
 
-  @Get(':uuid')
-  findOne(@Param('uuid') uuid: string) {
-    return this.accountsService.findOne(uuid);
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.accountsService.findOne(id);
   }
 
   @Patch(':id')
