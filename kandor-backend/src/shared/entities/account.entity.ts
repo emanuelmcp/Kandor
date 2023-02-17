@@ -1,4 +1,12 @@
-import { Column, Entity, JoinTable, ManyToMany, PrimaryColumn } from 'typeorm';
+import {
+  BeforeInsert,
+  Column,
+  DeleteDateColumn,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  PrimaryColumn,
+} from 'typeorm';
 import { Group } from './group.entity';
 
 @Entity({ name: 'Account' })
@@ -18,6 +26,9 @@ export class Account {
   @Column({ type: 'timestamptz' })
   createdAt: Date;
 
+  @DeleteDateColumn({ type: 'timestamptz', nullable: true })
+  deletedAt: Date;
+
   @Column({ type: 'timestamptz' })
   lastLogin: Date;
 
@@ -27,11 +38,16 @@ export class Account {
   @Column()
   banned: boolean;
 
-  @ManyToMany(() => Group)
+  @ManyToMany(() => Group, { cascade: true })
   @JoinTable({
     name: 'AccountGroup',
     joinColumn: { name: 'uuid' },
     inverseJoinColumn: { name: 'groupId' },
   })
   groups: Group[];
+
+  @BeforeInsert()
+  setStartDate() {
+    this.createdAt = new Date();
+  }
 }
