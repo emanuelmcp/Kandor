@@ -29,9 +29,6 @@ export class Account {
   @DeleteDateColumn({ type: 'timestamptz', nullable: true })
   deletedAt: Date;
 
-  @Column({ type: 'timestamptz' })
-  lastLogin: Date;
-
   @Column()
   logged: boolean;
 

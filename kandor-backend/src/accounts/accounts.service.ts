@@ -34,10 +34,14 @@ export class AccountsService {
   }
 
   async update(uuid: string, updateAccountDto: UpdateAccountDto) {
-    
+    const account = await this.accountRepository.preload({
+      uuid,
+      ...updateAccountDto,
+    });
+    return await this.accountRepository.save(account);
   }
 
   remove(uuid: string) {
-    return this.accountRepository.delete(uuid);
+    return this.accountRepository.softDelete(uuid);
   }
 }

@@ -4,6 +4,7 @@ import { GroupsModule } from './groups/groups.module';
 import { CommonModule } from './common/common.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { PermissionsModule } from './permissions/permissions.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     AccountsModule,
     GroupsModule,
     CommonModule,
+    PermissionsModule,
   ],
   controllers: [],
   providers: [],

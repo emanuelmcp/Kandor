@@ -1,8 +1,6 @@
-import { Type } from 'class-transformer';
 import {
   IsArray,
   IsBoolean,
-  IsDate,
   IsEmail,
   IsOptional,
   IsString,
@@ -21,10 +19,6 @@ export class CreateAccountDto {
 
   @IsString()
   password: string;
-
-  @IsDate()
-  @Type(() => Date)
-  lastLogin: Date;
 
   @IsBoolean()
   logged: boolean;

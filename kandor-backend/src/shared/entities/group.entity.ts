@@ -1,5 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn, ManyToMany } from 'typeorm';
-import { Account } from './account.entity';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Permission } from './permission.entity';
 
 @Entity({ name: 'Group' })
 export class Group {
@@ -18,6 +24,11 @@ export class Group {
   @Column({ nullable: true })
   suffix: string;
 
-  @ManyToMany(() => Account)
-  accounts: Account[];
+  @ManyToMany(() => Permission, { cascade: true })
+  @JoinTable({
+    name: 'GroupPermission',
+    joinColumn: { name: 'groupId' },
+    inverseJoinColumn: { name: 'permissionId' },
+  })
+  permissions: Permission[];
 }
