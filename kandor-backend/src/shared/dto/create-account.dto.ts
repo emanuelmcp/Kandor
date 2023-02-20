@@ -4,8 +4,10 @@ import {
   IsEmail,
   IsOptional,
   IsString,
+  ValidateNested,
 } from 'class-validator';
-import { CreateGroupDto } from './create-group.dto';
+import { Type } from 'class-transformer';
+import { UpdateGroupDto } from './update-group.dto';
 
 export class CreateAccountDto {
   @IsString()
@@ -26,7 +28,9 @@ export class CreateAccountDto {
   @IsBoolean()
   banned: boolean;
 
+  @ValidateNested({ each: true })
+  @Type(() => UpdateGroupDto)
   @IsOptional()
   @IsArray()
-  groups?: CreateGroupDto[];
+  groups?: UpdateGroupDto[];
 }

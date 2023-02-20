@@ -3,30 +3,29 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { CreateAccountDto } from 'src/shared/dto/create-account.dto';
 import { UpdateAccountDto } from 'src/shared/dto/update-account.dto';
 import { Account } from 'src/shared/entities/account.entity';
-import { Group } from 'src/shared/entities/group.entity';
 import { Repository } from 'typeorm';
+import { HandlerExceptionService } from '../common/handler-exception/handler-exception.service';
 
 @Injectable()
 export class AccountsService {
   constructor(
     @InjectRepository(Account)
     private readonly accountRepository: Repository<Account>,
-    @InjectRepository(Group)
-    private readonly groupRepository: Repository<Group>,
+    private readonly handleException: HandlerExceptionService,
   ) {}
 
   async create(createAccountDto: CreateAccountDto) {
-    const { groups = [], ...accountDetails } = createAccountDto;
-    const account = this.accountRepository.create({
-      ...accountDetails,
-      groups: groups.map((group) => this.groupRepository.create(group)),
-    });
-    const savedAccount = await this.accountRepository.save(account);
-    return savedAccount;
+    try {
+      const account = this.accountRepository.create({ ...createAccountDto });
+      await this.accountRepository.insert(account);
+      return account;
+    } catch (error) {
+      this.handleException.handleException(error, createAccountDto.uuid);
+    }
   }
 
   findAll() {
-    return `This action returns all accounts`;
+    return this.accountRepository.find();
   }
 
   async findOne(uuid: string) {

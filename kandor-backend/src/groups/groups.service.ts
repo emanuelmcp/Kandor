@@ -1,11 +1,26 @@
 import { Injectable } from '@nestjs/common';
 import { CreateGroupDto } from '../shared/dto/create-group.dto';
 import { UpdateGroupDto } from '../shared/dto/update-group.dto';
+import { Group } from '../shared/entities/group.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { HandlerExceptionService } from 'src/common/handler-exception/handler-exception.service';
 
 @Injectable()
 export class GroupsService {
-  create(createGroupDto: CreateGroupDto) {
-    return 'This action adds a new group';
+  constructor(
+    @InjectRepository(Group)
+    private readonly groupRepository: Repository<Group>,
+    private readonly handleException: HandlerExceptionService,
+  ) {}
+  async create(createGroupDto: CreateGroupDto) {
+    try {
+      const account = this.groupRepository.create({ ...createGroupDto });
+      await this.groupRepository.insert(account);
+      return account;
+    } catch (error) {
+      this.handleException.handleException(error, createGroupDto.groupName);
+    }
   }
 
   findAll() {

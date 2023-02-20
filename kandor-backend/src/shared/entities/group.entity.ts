@@ -1,10 +1,11 @@
 import {
   Column,
   Entity,
-  JoinTable,
-  ManyToMany,
   PrimaryGeneratedColumn,
+  ManyToMany,
+  JoinTable,
 } from 'typeorm';
+import { Account } from './account.entity';
 import { Permission } from './permission.entity';
 
 @Entity({ name: 'Group' })
@@ -24,7 +25,10 @@ export class Group {
   @Column({ nullable: true })
   suffix: string;
 
-  @ManyToMany(() => Permission, { cascade: true })
+  @ManyToMany(() => Account)
+  accounts: Account[];
+
+  @ManyToMany(() => Permission, { cascade: ['update'], eager: true })
   @JoinTable({
     name: 'GroupPermission',
     joinColumn: { name: 'groupId' },

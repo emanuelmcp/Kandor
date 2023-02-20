@@ -1,5 +1,6 @@
 import {
   BeforeInsert,
+  BeforeUpdate,
   Column,
   DeleteDateColumn,
   Entity,
@@ -8,6 +9,7 @@ import {
   PrimaryColumn,
 } from 'typeorm';
 import { Group } from './group.entity';
+import * as bcrypt from 'bcrypt';
 
 @Entity({ name: 'Account' })
 export class Account {
@@ -35,7 +37,7 @@ export class Account {
   @Column()
   banned: boolean;
 
-  @ManyToMany(() => Group, { cascade: true })
+  @ManyToMany(() => Group, { cascade: ['update'], eager: true })
   @JoinTable({
     name: 'AccountGroup',
     joinColumn: { name: 'uuid' },
@@ -46,5 +48,12 @@ export class Account {
   @BeforeInsert()
   setStartDate() {
     this.createdAt = new Date();
+  }
+
+  @BeforeUpdate()
+  @BeforeInsert()
+  async encryptPassword() {
+    const saltOrRounds = 10;
+    this.password = await bcrypt.hash(this.password, saltOrRounds);
   }
 }
