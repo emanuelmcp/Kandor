@@ -1,17 +1,7 @@
-import {
-  BeforeInsert,
-  BeforeUpdate,
-  Column,
-  DeleteDateColumn,
-  Entity,
-  JoinTable,
-  ManyToMany,
-  PrimaryColumn,
-} from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryColumn } from 'typeorm';
 import { Group } from './group.entity';
-import * as bcrypt from 'bcrypt';
 
-@Entity({ name: 'Account' })
+@Entity()
 export class Account {
   @PrimaryColumn()
   uuid: string;
@@ -19,17 +9,14 @@ export class Account {
   @Column()
   nick: string;
 
-  @Column()
+  @Column({ nullable: true })
   email: string;
 
   @Column()
   password: string;
 
   @Column({ type: 'timestamptz' })
-  createdAt: Date;
-
-  @DeleteDateColumn({ type: 'timestamptz', nullable: true })
-  deletedAt: Date;
+  lastLogin: Date;
 
   @Column()
   logged: boolean;
@@ -37,23 +24,6 @@ export class Account {
   @Column()
   banned: boolean;
 
-  @ManyToMany(() => Group, { cascade: ['update'], eager: true })
-  @JoinTable({
-    name: 'AccountGroup',
-    joinColumn: { name: 'uuid' },
-    inverseJoinColumn: { name: 'groupId' },
-  })
-  groups: Group[];
-
-  @BeforeInsert()
-  setStartDate() {
-    this.createdAt = new Date();
-  }
-
-  @BeforeUpdate()
-  @BeforeInsert()
-  async encryptPassword() {
-    const saltOrRounds = 10;
-    this.password = await bcrypt.hash(this.password, saltOrRounds);
-  }
+  @ManyToOne(() => Group, (group) => group.accounts)
+  group: Group;
 }

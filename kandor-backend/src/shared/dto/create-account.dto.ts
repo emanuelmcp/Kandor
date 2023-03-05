@@ -1,13 +1,5 @@
-import {
-  IsArray,
-  IsBoolean,
-  IsEmail,
-  IsOptional,
-  IsString,
-  ValidateNested,
-} from 'class-validator';
 import { Type } from 'class-transformer';
-import { UpdateGroupDto } from './update-group.dto';
+import { IsString, IsDate, IsBoolean } from 'class-validator';
 
 export class CreateAccountDto {
   @IsString()
@@ -16,21 +8,19 @@ export class CreateAccountDto {
   @IsString()
   nick: string;
 
-  @IsEmail()
+  @IsString()
   email: string;
 
   @IsString()
   password: string;
+
+  @Type(() => Date)
+  @IsDate()
+  lastLogin: Date;
 
   @IsBoolean()
   logged: boolean;
 
   @IsBoolean()
   banned: boolean;
-
-  @ValidateNested({ each: true })
-  @Type(() => UpdateGroupDto)
-  @IsOptional()
-  @IsArray()
-  groups?: UpdateGroupDto[];
 }

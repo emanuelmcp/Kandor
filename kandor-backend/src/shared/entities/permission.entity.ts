@@ -1,12 +1,9 @@
-import { PrimaryGeneratedColumn, Entity, Column, ManyToMany } from 'typeorm';
+import { Column, Entity, ManyToMany, PrimaryColumn } from 'typeorm';
 import { Group } from './group.entity';
 
-@Entity({ name: 'Permission' })
+@Entity()
 export class Permission {
-  @PrimaryGeneratedColumn()
-  permissionId: number;
-
-  @Column({ unique: true })
+  @PrimaryColumn()
   permissionName: string;
 
   @Column()

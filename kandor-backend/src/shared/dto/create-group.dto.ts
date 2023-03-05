@@ -1,5 +1,4 @@
-import { IsArray, IsOptional, IsString } from 'class-validator';
-import { CreatePermissionDto } from './create-permission.dto';
+import { IsString } from 'class-validator';
 
 export class CreateGroupDto {
   @IsString()
@@ -13,8 +12,4 @@ export class CreateGroupDto {
 
   @IsString()
   suffix: string;
-
-  @IsOptional()
-  @IsArray()
-  permissions?: CreatePermissionDto[];
 }

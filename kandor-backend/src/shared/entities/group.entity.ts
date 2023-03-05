@@ -1,19 +1,11 @@
-import {
-  Column,
-  Entity,
-  PrimaryGeneratedColumn,
-  ManyToMany,
-  JoinTable,
-} from 'typeorm';
-import { Account } from './account.entity';
+import { Column, Entity, JoinTable, ManyToMany, PrimaryColumn } from 'typeorm';
 import { Permission } from './permission.entity';
+import { Account } from './account.entity';
+import { OneToMany } from 'typeorm';
 
-@Entity({ name: 'Group' })
+@Entity()
 export class Group {
-  @PrimaryGeneratedColumn()
-  groupId: number;
-
-  @Column({ unique: true })
+  @PrimaryColumn({ unique: true })
   groupName: string;
 
   @Column({ nullable: true })
@@ -25,14 +17,14 @@ export class Group {
   @Column({ nullable: true })
   suffix: string;
 
-  @ManyToMany(() => Account)
-  accounts: Account[];
-
-  @ManyToMany(() => Permission, { cascade: ['update'], eager: true })
+  @ManyToMany(() => Permission)
   @JoinTable({
-    name: 'GroupPermission',
-    joinColumn: { name: 'groupId' },
-    inverseJoinColumn: { name: 'permissionId' },
+    name: 'GroupPermissions',
+    joinColumn: { name: 'groupName' },
+    inverseJoinColumn: { name: 'permissionName' },
   })
   permissions: Permission[];
+
+  @OneToMany(() => Account, (account) => account.group)
+  accounts: Account;
 }

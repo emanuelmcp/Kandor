@@ -4,13 +4,14 @@ package io.github.emanuelmcp.minecraftcore.repository;
 import com.google.inject.Inject;
 import feign.FeignException;
 import io.github.emanuelmcp.minecraftcore.models.Account;
-import io.github.emanuelmcp.minecraftcore.rest.AccountEndpoint;
-import io.github.emanuelmcp.minecraftcore.rest.EndpointFactory;
+import io.github.emanuelmcp.minecraftcore.api.rest.endpoints.AccountEndpoint;
+import io.github.emanuelmcp.minecraftcore.api.rest.EndpointFactory;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.Optional;
 
+@SuppressWarnings("unused")
 public class AccountRepository {
     private final FileConfiguration CONFIG;
     private final String BASE_ENDPOINT;

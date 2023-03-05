@@ -7,9 +7,9 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
-import { AccountsService } from 'src/accounts/accounts.service';
-import { CreateAccountDto } from 'src/shared/dto/create-account.dto';
-import { UpdateAccountDto } from 'src/shared/dto/update-account.dto';
+import { AccountsService } from '../modules/accounts/accounts.service';
+import { CreateAccountDto } from '../shared/dto/create-account.dto';
+import { UpdateAccountDto } from '../shared/dto/update-account.dto';
 
 @Controller('accounts')
 export class AccountsController {
@@ -32,11 +32,11 @@ export class AccountsController {
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateAccountDto: UpdateAccountDto) {
-    return this.accountsService.update(id, updateAccountDto);
+    return this.accountsService.update(+id, updateAccountDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.accountsService.remove(id);
+    return this.accountsService.remove(+id);
   }
 }

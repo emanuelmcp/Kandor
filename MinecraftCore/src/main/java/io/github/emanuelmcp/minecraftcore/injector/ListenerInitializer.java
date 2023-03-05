@@ -2,7 +2,7 @@ package io.github.emanuelmcp.minecraftcore.injector;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
-import io.github.emanuelmcp.minecraftcore.listeners.login.PlayerJoinEvent;
+import io.github.emanuelmcp.minecraftcore.listeners.PlayerJoinEvent;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;

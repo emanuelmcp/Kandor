@@ -1,9 +1,7 @@
-import { Global, Module } from '@nestjs/common';
-import { HandlerExceptionService } from './handler-exception/handler-exception.service';
+import { Module } from '@nestjs/common';
+import { HandlerExceptionsService } from './handler-exceptions/handler-exceptions.service';
 
-@Global()
 @Module({
-  providers: [HandlerExceptionService],
-  exports: [HandlerExceptionService],
+  providers: [HandlerExceptionsService]
 })
 export class CommonModule {}

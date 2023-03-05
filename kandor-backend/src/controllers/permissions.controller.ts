@@ -7,8 +7,8 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
+import { PermissionsService } from '../modules/permissions/permissions.service';
 import { CreatePermissionDto } from '../shared/dto/create-permission.dto';
-import { PermissionsService } from 'src/permissions/permissions.service';
 import { UpdatePermissionDto } from 'src/shared/dto/update-permission.dto';
 
 @Controller('permissions')

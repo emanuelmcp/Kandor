@@ -1,0 +1,13 @@
+name: KandorAuth
+version: '${project.version}'
+main: io.github.emanuelmcp.kandorauth.KandorAuth
+api-version: 1.19
+authors: [ Emanuel ]
+description: Auth Module for Kandor Server
+website: https://github.com/emanuelmcp
+commands:
+  register:
+    description: Comando para registrar un jugador
+    usage: /register <password> <confirmPassword>
+  group:
+    description: Comandos para gestionar grupos

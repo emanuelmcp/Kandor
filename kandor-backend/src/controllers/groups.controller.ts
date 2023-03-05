@@ -6,8 +6,9 @@ import {
   Patch,
   Param,
   Delete,
+  Put,
 } from '@nestjs/common';
-import { GroupsService } from '../groups/groups.service';
+import { GroupsService } from '../modules/groups/groups.service';
 import { CreateGroupDto } from '../shared/dto/create-group.dto';
 import { UpdateGroupDto } from '../shared/dto/update-group.dto';
 
@@ -25,18 +26,21 @@ export class GroupsController {
     return this.groupsService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.groupsService.findOne(+id);
+  @Get(':groupName')
+  findOne(@Param('groupName') groupName: string) {
+    return this.groupsService.findOne(groupName);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateGroupDto: UpdateGroupDto) {
-    return this.groupsService.update(+id, updateGroupDto);
+  @Post(':groupName')
+  update(
+    @Param('groupName') groupName: string,
+    @Body() updateGroupDto: UpdateGroupDto,
+  ) {
+    return this.groupsService.update(groupName, updateGroupDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.groupsService.remove(+id);
+  @Delete(':groupName')
+  async remove(@Param('groupName') groupName: string) {
+    return this.groupsService.remove(groupName);
   }
 }

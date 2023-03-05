@@ -1,28 +1,27 @@
 import { Module } from '@nestjs/common';
-import { AccountsModule } from './accounts/accounts.module';
-import { GroupsModule } from './groups/groups.module';
 import { CommonModule } from './common/common.module';
-import { ConfigModule } from '@nestjs/config';
+import { AccountsModule } from './modules/accounts/accounts.module';
+import { GroupsModule } from './modules/groups/groups.module';
+import { PermissionsModule } from './modules/permissions/permissions.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { PermissionsModule } from './permissions/permissions.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    CommonModule,
+    AccountsModule,
+    GroupsModule,
+    PermissionsModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
+      port: 5432,
       username: 'root',
       password: 'root',
       database: 'test_db',
-      logging: true,
       autoLoadEntities: true,
       synchronize: true,
+      logging: true,
     }),
-    AccountsModule,
-    GroupsModule,
-    CommonModule,
-    PermissionsModule,
   ],
   controllers: [],
   providers: [],
