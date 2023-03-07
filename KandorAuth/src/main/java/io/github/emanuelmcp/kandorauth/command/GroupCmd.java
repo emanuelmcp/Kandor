@@ -32,7 +32,7 @@ public class GroupCmd implements CommandExecutor {
                     player.sendMessage("Este comando no se utiliza así");
                     return true;
                 }
-                groupHandler.save(args[1]);
+                groupHandler.createGroup(args[1]);
                 player.sendMessage("Grupo creado");
             }
             case "delete" -> {
@@ -40,7 +40,7 @@ public class GroupCmd implements CommandExecutor {
                     player.sendMessage("Este comando no se utiliza así");
                     return true;
                 }
-                groupHandler.delete(args[1]);
+                groupHandler.deleteGroup(args[1]);
                 player.sendMessage("Grupo borrado");
             }
             case "add" -> {
@@ -60,8 +60,7 @@ public class GroupCmd implements CommandExecutor {
                     player.sendMessage("Este comando no se utiliza así");
                     return true;
                 }
-                groupHandler.update(args[1], args[2]);
-                player.sendMessage("Has establecido correctamente el prefijo");
+                groupHandler.setPrefixGroup(args[1], args[2]);
             }
             default -> {
                 player.sendMessage("Esto es la ayuda del comando /group");

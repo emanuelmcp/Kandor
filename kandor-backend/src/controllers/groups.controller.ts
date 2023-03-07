@@ -1,13 +1,13 @@
 import {
-  Controller,
-  Get,
-  Post,
   Body,
-  Patch,
-  Param,
+  Controller,
   Delete,
+  Get,
+  Param,
+  Post,
   Put,
 } from '@nestjs/common';
+
 import { GroupsService } from '../modules/groups/groups.service';
 import { CreateGroupDto } from '../shared/dto/create-group.dto';
 import { UpdateGroupDto } from '../shared/dto/update-group.dto';
@@ -31,7 +31,7 @@ export class GroupsController {
     return this.groupsService.findOne(groupName);
   }
 
-  @Post(':groupName')
+  @Put(':groupName')
   update(
     @Param('groupName') groupName: string,
     @Body() updateGroupDto: UpdateGroupDto,

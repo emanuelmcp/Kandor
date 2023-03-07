@@ -31,7 +31,7 @@ export class GroupsService {
       ...updateGroupDto,
     });
     try {
-      await this.groupRepository.save(group);
+      return await this.groupRepository.save(group);
     } catch (error) {}
   }
 

@@ -2,10 +2,8 @@ package io.github.emanuelmcp.kandorauth.command.handlers;
 
 import com.google.inject.Inject;
 import feign.FeignException;
-import io.github.emanuelmcp.kandorauth.dto.UpdateGroupDto;
 import io.github.emanuelmcp.kandorauth.entity.Group;
 import io.github.emanuelmcp.kandorauth.repository.GroupRepository;
-import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.bukkit.Bukkit;
 
 public class GroupHandler {
@@ -14,7 +12,7 @@ public class GroupHandler {
     public GroupHandler(GroupRepository groupRepository) {
         this.groupRepository = groupRepository;
     }
-    public void save(String name) {
+    public void createGroup(String name) {
         Group group = Group.builder().groupName(name).build();
         try {
             this.groupRepository.save(group);
@@ -22,19 +20,24 @@ public class GroupHandler {
             Bukkit.getLogger().warning("No se puede guardar el grupo");
         }
     }
-    public void delete(String groupName) {
+    public void deleteGroup(String groupName) {
         this.groupRepository.delete(groupName);
     }
-    public void update(String prefix, String groupName) {
-        this.groupRepository.update(groupName, new UpdateGroupDto(prefix, null, null))
+/*    public void setPrefixGroup(String groupName, String prefix) {
+        Group updatedGroup = Group.builder().prefix(prefix).build();
+        groupRepository.update(groupName, updatedGroup)
                 .subscribeOn(Schedulers.io())
                 .subscribe(
-                        group -> {
-                            Bukkit.getLogger().info(String.format("Se ha actualizado el prefijo del grupo %s", groupName));
-                        },
-                        error -> {
-                            Bukkit.getLogger().warning(String.format("Se ha producido un error al actualizar el prefijo del grupo %s", groupName));
-                        }
+                        group -> Bukkit.getLogger().warning("grupo actualizado"),
+                        throwable -> Bukkit.getLogger().warning("algo ha salido mal"),
+                        () -> Bukkit.getLogger().warning("NOOOOOOOOOOOO")
                 );
+    }*/
+    public void setPrefixGroup(String groupName, String prefix) {
+        Group updatedGroup = Group.builder().prefix(prefix).build();
+        groupRepository.update(groupName, updatedGroup)
+                .doOnComplete(() -> Bukkit.getLogger().warning("Prefijo actualizado"))
+                .doOnError(throwable -> Bukkit.getLogger().warning("No se ha podido actualizar el prefijo"))
+                .subscribe();
     }
 }
